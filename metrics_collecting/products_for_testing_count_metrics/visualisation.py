@@ -5,12 +5,11 @@ import os
 output_dir = "graphs"
 os.makedirs(output_dir, exist_ok=True)
 
-df = pd.read_csv("metrics_for_every_product.csv")
+df = pd.read_csv("metrics.csv")
 
 total_products = len(df)
 
-# Более детализированные ценовые диапазоны
-# price_bins = [0, 1000, 2000, 3000, 4000, 5000, 10000, 20000, 30000, 40000, 50000, float('inf')]
+# ценовые диапазоны в копейках
 price_bins = [0, 100000, 200000, 300000, 400000, 500000, 1000000, 2000000, 3000000, 4000000, 5000000, float('inf')]
 
 price_labels = [

@@ -1,0 +1,62 @@
+services:
+  db_service:
+    image: postgres
+    container_name: data_base_test_container
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    volumes:
+      - ./db_data_for_prophet_testing:/var/lib/postgresql/data
+    restart: unless-stopped
+#  prophet_testing_module1:
+#    image: python:3
+#    container_name: prophet_testing_container1
+#    volumes:
+#      - ./short_window_metrics:/app
+#    working_dir: /app
+#    command: "bash -c 'python3 -m venv myenv && source myenv/bin/activate && pip install -r requirements.txt && python3 metrics_collecting.py'"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "1.00"
+#          memory: 2G
+#        reservations:
+#          cpus: "0.5"
+#          memory: 128M
+#    restart: unless-stopped
+#  prophet_testing_module2:
+#    image: python:3
+#    container_name: prophet_testing_container2
+#    volumes:
+#      - ./middle_window_metrics:/app
+#    working_dir: /app
+#    command: "bash -c 'python3 -m venv myenv && source myenv/bin/activate && pip install -r requirements.txt && python3 metrics_collecting.py'"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "1.00"
+#          memory: 2G
+#        reservations:
+#          cpus: "0.5"
+#          memory: 128M
+#    restart: unless-stopped
+#  prophet_testing_module3:
+#    image: python:3
+#    container_name: prophet_testing_container3
+#    volumes:
+#      - ./long_window_metrics:/app
+#    working_dir: /app
+#    command: "bash -c 'python3 -m venv myenv && source myenv/bin/activate && pip install -r requirements.txt && python3 metrics_collecting.py'"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "1.00"
+#          memory: 2G
+#        reservations:
+#          cpus: "0.5"
+#          memory: 128M
+#    restart: unless-stopped
+
+
