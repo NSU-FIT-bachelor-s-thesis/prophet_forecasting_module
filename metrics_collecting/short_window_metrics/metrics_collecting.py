@@ -115,7 +115,7 @@ def main():
         dbname="db",
         user="user",
         password="password",
-        host="localhost",
+        host="db_service",
         port="5432"
     )
     cursor = conn.cursor()
