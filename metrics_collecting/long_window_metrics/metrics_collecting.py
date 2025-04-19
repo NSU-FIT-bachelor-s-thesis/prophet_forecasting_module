@@ -94,7 +94,7 @@ def main():
     )
     cursor = conn.cursor()
 
-    output_file = "metrics_for_every_product.csv"
+    output_file = "metrics.csv"
 
     pd.DataFrame(columns=[
         "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE", "avg_price"
