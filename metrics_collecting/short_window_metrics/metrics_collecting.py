@@ -4,7 +4,6 @@ import psycopg2
 import math
 from sklearn.metrics import mean_squared_error, mean_absolute_error, median_absolute_error
 import numpy as np
-import os
 import logging
 
 
@@ -122,11 +121,16 @@ def main():
 
     output_file = "metrics.csv"
 
-    if not os.path.exists(output_file):
-        pd.DataFrame(columns=[
-            "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE",
-            "avg_price", "successful_windows", "failed_windows"
-        ]).to_csv(output_file, index=False)
+    pd.DataFrame(columns=[
+        "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE",
+        "avg_price", "successful_windows", "failed_windows"
+    ]).to_csv(output_file, index=False)
+
+    # if not os.path.exists(output_file):
+    #     pd.DataFrame(columns=[
+    #         "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE",
+    #         "avg_price", "successful_windows", "failed_windows"
+    #     ]).to_csv(output_file, index=False)
 
     cursor.execute("""
         SELECT DISTINCT product_id

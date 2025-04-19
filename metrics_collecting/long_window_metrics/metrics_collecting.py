@@ -4,7 +4,17 @@ import psycopg2
 import math
 from sklearn.metrics import mean_squared_error, mean_absolute_error, median_absolute_error
 import numpy as np
-import os
+import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('fastapi_service.log'),
+        logging.StreamHandler()
+    ]
+)
 
 
 def normalize_time_series(df, time_column='measurement_time', value_column='product_price'):
@@ -86,11 +96,14 @@ def main():
 
     output_file = "metrics_for_every_product.csv"
 
-    # создаём файл с заголовком, если его нет
-    if not os.path.exists(output_file):
-        pd.DataFrame(columns=[
-            "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE", "avg_price"
-        ]).to_csv(output_file, index=False)
+    pd.DataFrame(columns=[
+        "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE", "avg_price"
+    ]).to_csv(output_file, index=False)
+
+    # if not os.path.exists(output_file):
+    #     pd.DataFrame(columns=[
+    #         "product_id", "MAE", "RMSE", "MAPE", "MDAE", "MDAPE", "avg_price"
+    #     ]).to_csv(output_file, index=False)
 
     # Получаем список всех product_id
     cursor.execute("""
@@ -105,14 +118,14 @@ def main():
     for product_id_tuple in product_ids:
         product_id = product_id_tuple[0]
         counter = counter + 1
-        print(f"Анализ товара номер {counter}...")
+        logging.info(f"Анализ товара номер {counter}...")
 
         metrics = run_for_product(product_id, cursor)
         if metrics:
             df = pd.DataFrame([metrics])
             df.to_csv(output_file, mode='a', index=False, header=False)
 
-    print(f"\nГотово! Метрики сохранены в {output_file}")
+    logging.info(f"\nМетрики сохранены в {output_file}")
     cursor.close()
     conn.close()
 
