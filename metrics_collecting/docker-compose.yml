@@ -27,7 +27,6 @@ services:
           memory: 128M
     depends_on:
       - db_service
-    restart: unless-stopped
   prophet_testing_module2:
     image: python:3
     container_name: prophet_testing_container2
@@ -45,7 +44,6 @@ services:
           memory: 128M
     depends_on:
       - db_service
-    restart: unless-stopped
   prophet_testing_module3:
     image: python:3
     container_name: prophet_testing_container3
@@ -63,4 +61,3 @@ services:
           memory: 128M
     depends_on:
       - db_service
-    restart: unless-stopped
