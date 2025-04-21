@@ -27,5 +27,5 @@ for i, count in enumerate(counts):
     percent = count / total_products * 100
     ax.text(i, count + max(counts)*0.01, f"{percent:.1f}%", ha='center', va='bottom', fontsize=9)
 
-plt.savefig(os.path.join(output_dir, f"{metric}_hist.svg"), format='svg')
+plt.savefig(os.path.join(output_dir, f"{metric}.svg"), format='svg')
 plt.close()
